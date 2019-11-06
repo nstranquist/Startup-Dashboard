@@ -1,0 +1,38 @@
+Dashboard: https://dribbble.com/shots/6864017-Dashboard-WorldDance
+
+dashboard colors:
+
+#151F32 -dk sidebar color (and main font?)
+#1E2739 -highlight selected tab sidebar
+#FFFFFF -background color (white) (and sidebar font)
+
+
+
+layout: 6 column grid, equal distance, some margins on side (~3x gutter width)
+        Small gutter gaps
+
+
+
+Dashboard: https://dribbble.com/shots/6909409-Bank-Dashboard-Design
+
+colors:
+#ffffff -background color(white)
+#FAFCFE -light sidebar color
+#4F84FF -blue accent
+
+black font color (emphasis text)
+dark gray font color (not emphasis text)
+
+layout: ~8 column grid system
+
+
+
+Dashboard: https://dribbble.com/shots/6802464-Meeting-Scheduler
+
+colors:
+#6F52ED  -purple sidebar bg, accent / highlight font color
+#E3E2E7  -light gray text
+#ffffff  -white bg, font color for dark bgs
+#F8F8F8  -offwhite accent for side content and borders
+#E4898A  -red-orange accent
+#C6EBDC  -lightgreen accent
