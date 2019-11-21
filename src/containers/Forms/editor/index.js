@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import Async from '../../../helpers/asyncComponent';
 import PageHeader from '../../../components/utility/pageHeader';
 import Box from '../../../components/utility/box';
 import LayoutWrapper from '../../../components/utility/layoutWrapper.js';
 import ContentHolder from '../../../components/utility/contentHolder';
 import IntlMessages from '../../../components/utility/intlMessages';
+import { Button } from 'antd'
 
 const Editor = props => (
   <Async
@@ -63,6 +65,12 @@ export default class extends Component {
           <ContentHolder>
             <Editor {...editorOption} />
           </ContentHolder>
+          <Button><Link to='/dashboard'>
+            Submit
+            </Link></Button>
+            <Button><Link to='/dashboard'>
+            Check Your Work
+            </Link></Button>
         </Box>
       </LayoutWrapper>
     );

@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: 'scholarships',
-    component: asyncComponent(() => import('../../containers/Tables/antTables/')),
+    component: asyncComponent(() => import('../../acomponents/tables/ScholarshipsList')),
   },
   {
     path: 'schools',

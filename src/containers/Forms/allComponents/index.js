@@ -15,17 +15,6 @@ export default class extends Component {
     return (
       <div>
         <InputField />
-        <IsoAutocomplete />
-        <IsoCheckbox />
-        <IsoUpload />
-        <IsoSelectBox />
-        <br />
-        <IsoTreeSelect />
-        <IsoMention />
-        <IsoRadiobox />
-        <br />
-        <IsoSlider />
-        <IsoTransfer />
       </div>
     );
   }

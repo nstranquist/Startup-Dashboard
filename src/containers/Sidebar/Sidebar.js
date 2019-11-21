@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import clone from "clone";
 import { Link } from "react-router-dom";
 import { Layout } from "antd";
-import options from "./options";
+import {file, find, fund} from "./options";
 import Scrollbars from "../../components/utility/customScrollBar.js";
 import Menu from "../../components/uielements/menu";
 import IntlMessages from "../../components/utility/intlMessages";
@@ -159,9 +159,24 @@ class Sidebar extends Component {
               selectedKeys={app.current}
               onOpenChange={this.onOpenChange}
             >
-              {options.map(singleOption =>
-                this.getMenuItem({ submenuStyle, submenuColor, singleOption })
-              )}
+              <Menu.ItemGroup key='1' title='File' >
+                {file.map(singleOption =>
+                  this.getMenuItem({ submenuStyle, submenuColor, singleOption })
+                )}
+                <Menu.Item disabled></Menu.Item>
+              </Menu.ItemGroup>
+              <Menu.ItemGroup key='2' title='Find' >
+                {find.map(singleOption =>
+                  this.getMenuItem({ submenuStyle, submenuColor, singleOption })
+                )}
+                <Menu.Item disabled></Menu.Item>
+              </Menu.ItemGroup>
+            
+              <Menu.ItemGroup key='3' title='Fund'>
+                {fund.map(singleOption =>
+                  this.getMenuItem({ submenuStyle, submenuColor, singleOption })
+                )}
+              </Menu.ItemGroup>
             </Menu>
           </Scrollbars>
         </Sider>

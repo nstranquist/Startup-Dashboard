@@ -7,13 +7,13 @@ export const getScholarships = () => (dispatch,  getState) => {
   dispatch({ type: 'LOADING_SCHOLARSHIPS' })
   firestore
     .collection('rawScholarships')
-    .orderBy('index')
+    //.orderBy('index')
     .get()
     .then((snap) => {
       let scholarshipsResponse = []
       snap.docs.map(scholarship => {
         scholarshipsResponse.push({
-          index: scholarship.data().index,
+          index: scholarship.id,
           name: scholarship.data().name,
           description: scholarship.data().description,
           school: scholarship.data().school,

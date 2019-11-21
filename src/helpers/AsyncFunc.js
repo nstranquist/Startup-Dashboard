@@ -22,7 +22,7 @@ export default function asyncComponent(importComponent) {
       this.mounted = true;
       const { default: Component } = await importComponent();
       Nprogress.done();
-      if (this.mounted) {
+      if (this.mounted && Component) {
         this.setState({
           component: <Component {...this.props} />,
         });

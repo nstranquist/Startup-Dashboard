@@ -40,6 +40,7 @@ export const attemptSignup = (email, password, firstName, lastName, history) => 
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((userCreds) => {
+      auth.currentUser.sendEmailVerification()
       dispatch({ type: 'LOADING_AUTH' })
       console.log('signup successful with data: ', userCreds)
       dispatch({ type: 'AUTHENTICATE' })

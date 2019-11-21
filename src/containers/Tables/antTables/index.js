@@ -18,21 +18,6 @@ export default class AntTable extends Component {
       case 'filterView':
         Component = TableViews.FilterView;
         break;
-      case 'editView':
-        Component = TableViews.EditView;
-        break;
-      case 'groupView':
-        Component = TableViews.GroupView;
-        break;
-      case 'customizedView':
-        Component = TableViews.CustomizedView;
-        break;
-      case 'dashboardView':
-        Component = TableViews.DashboardView;
-        break;
-      case 'competitionView':
-        Component = TableViews.CompetitionView;
-        break;
       default:
         Component = TableViews.SimpleView;
     }

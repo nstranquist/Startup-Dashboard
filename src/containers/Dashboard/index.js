@@ -16,20 +16,18 @@ import PricingLineChart from "../Charts/recharts/charts/pricingLineChart";
 import propertiesActions from "../../redux/properties/actions";
 import PropertyMap from "../Map/GoogleMap/maps/propertyMap";
 import { Card } from 'antd';
+import { getUserData } from '../../redux/_store/profileContainer/userData/actions'
+import { getScholarships } from '../../redux/_store/scholarships/actions'
+import TabList from './TabList'
 import Spin from '../Feedback/Spin/spin.style';
-
-const { getCompetition, getMarketBooking, getMarketPricing, getProjectedRent, getMarketStats } = propertiesActions;
 
 class Dashboard extends Component {
   componentDidMount() {
-    this.loadCompetition();
-    this.loadBooking();
-    this.loadPricing();
-    this.loadProjectedRent();
-    this.loadMarketStats();
+    this.props.getUserData()
+    this.props.getScholarships()
   }
 
-  componentWillReceiveProps(nextProps) {
+  //componentWillReceiveProps(nextProps) {
     // if(this.props.user !== nextProps.user) {
       // if(nextProps.user && !nextProps.user.settings.selected_plan){
       //   this.props.history.push("/dashboard/settings?s=plan&n=true");
@@ -43,35 +41,35 @@ class Dashboard extends Component {
       // }
     // }
 
-    if(this.props.user && nextProps.user && this.props.user.current_property !== nextProps.user.current_property){
-      this.loadCompetition();
-      this.loadBooking();
-      this.loadPricing();
-      this.loadProjectedRent();
-      this.loadMarketStats();
-    }
-  }
+    // if(this.props.user && nextProps.user && this.props.user.current_property !== nextProps.user.current_property){
+    //   this.loadCompetition();
+    //   this.loadBooking();
+    //   this.loadPricing();
+    //   this.loadProjectedRent();
+    //   this.loadMarketStats();
+    // }
+  //}
 
-  loadCompetition = () => {
-    const { getCompetition } = this.props;
-    getCompetition({limit: 5});
-  };
-  loadBooking = () => {
-    const { getMarketBooking } = this.props;
-    getMarketBooking();
-  };
-  loadPricing = () => {
-    const { getMarketPricing } = this.props;
-    getMarketPricing();
-  };
-  loadProjectedRent = () => {
-    const { getProjectedRent } = this.props;
-    getProjectedRent();
-  };
-  loadMarketStats = () => {
-    const { getMarketStats } = this.props;
-    getMarketStats();
-  };
+  // loadCompetition = () => {
+  //   const { getCompetition } = this.props;
+  //   getCompetition({limit: 5});
+  // };
+  // loadBooking = () => {
+  //   const { getMarketBooking } = this.props;
+  //   getMarketBooking();
+  // };
+  // loadPricing = () => {
+  //   const { getMarketPricing } = this.props;
+  //   getMarketPricing();
+  // };
+  // loadProjectedRent = () => {
+  //   const { getProjectedRent } = this.props;
+  //   getProjectedRent();
+  // };
+  // loadMarketStats = () => {
+  //   const { getMarketStats } = this.props;
+  //   getMarketStats();
+  // };
 
   render() {
     const { rowStyle, colStyle } = basicStyle;
@@ -108,138 +106,66 @@ class Dashboard extends Component {
       datas: pricing
     };
     return (
-      <LayoutWrapper>
-        <div style={wisgetPageStyle}>
-          <Row style={rowStyle} gutter={0} justify="start">
-            <Col lg={12} md={12} sm={24} xs={24} style={colStyle}>
-              <IsoWidgetsWrapper>
-                {/* Report Widget */}
-                <ReportsWidget
-                  label={<IntlMessages id="dashboard.reportsrate.label" />}
-                >
-                  <Spin spinning={this.props.loadingPricingChart} size="large"><PricingLineChart {...pricingConfig} /></Spin>
-                </ReportsWidget>
-              </IsoWidgetsWrapper>
+      // <LayoutWrapper>
+        <div style={{padding: '30px', textAlign:'center'}}>
+          <Row gutter={24} span={24} style={{marginBottom: '30px !important'}}>
+            <Col md={24} lg={8} >
+              <Card title="Matches" bordered={false}>
+                <span style={{color:'green', fontSize:'30px'}}>5</span>
+              </Card>
             </Col>
-            <Col lg={12} md={12} sm={24} xs={24} style={colStyle}>
-              <Spin spinning={this.props.user == null} size="large">
-                <IsoWidgetsWrapper height='100%'>
-                  <Card bodyStyle={{ padding: 0 }} title="Property Location">
-                    {this.props.user && (
-                      <PropertyMap user={this.props.user} property={this.props.user.current_property} />
-                    )}
-                  </Card>
-                </IsoWidgetsWrapper>
-              </Spin>
+            <Col md={24} lg={8}>
+              <Card title="All Scholarships" bordered={false}>
+              <span style={{fontSize:'30px'}}>250</span>
+              </Card>
+            </Col>
+            <Col md={24} lg={8}>
+              <Card title="Applications" bordered={false}>
+              <span style={{color:'blue', fontSize:'30px'}}>3</span>
+              </Card>
             </Col>
           </Row>
-
-          <Row style={rowStyle} gutter={0} justify="start">
-            <Col lg={12} md={12} sm={24} xs={24} style={colStyle}>
-              <IsoWidgetsWrapper height='100%'>
-                <ReportsWidget
-                  label="Top 5 Nearest Properties"
+          <Row><Col span={24} style={{fontSize: '30px', textAlign: 'center', marginTop: '30px', marginBottom: '15px'}}>Summary</Col></Row>
+          <Row gutter={24} style={{margin: '30px', marginTop: '30px'}}>
+            <Col span={24} >
+              <Card>
+                <Card type="inner" title="Matches" extra={<a href="#">More</a>}>
+                  {this.props.scholarships.map(item => {
+                    <div>item.name</div>
+                  })}
+                  No matches yet
+                </Card>
+                <Card
+                  style={{ marginTop: 16 }}
+                  type="inner"
+                  title="Scholarships"
+                  extra={<a href="#">More</a>}
                 >
-                  <Spin spinning={this.props.loadingCompetition} size="large">
-                    <TableViews.DashboardView
-                      tableInfo={tableinfos[0]}
-                      dataSource={competition}
-                    />
-                  </Spin>
-                </ReportsWidget>
-              </IsoWidgetsWrapper>
-            </Col>
-            <Col lg={6} md={12} sm={12} xs={24} style={colStyle}>
-              <Spin spinning={this.props.loadingMarketStats} size="large">
-                <IsoWidgetsWrapper gutterBottom={20}>
-                  <CardWidget
-                    icon="ion-ios-bookmarks"
-                    iconcolor="#F75D81"
-                    number={marketStats && marketStats.booking_percent[0].pct_booked ? (parseFloat(marketStats.booking_percent[0].pct_booked) * 100).toLocaleString(undefined, {maximumFractionDigits:0}) + '%' : '0%'}
-                    text="30 Day Booking %"
-                  />
-                </IsoWidgetsWrapper>
-              </Spin>
-              <Spin spinning={this.props.loadingMarketStats} size="large">
-                <IsoWidgetsWrapper gutterBottom={20}>
-                  <CardWidget
-                    icon="ion-ios-bookmarks"
-                    iconcolor="#F75D81"
-                    number={marketStats && marketStats.booking_percent_competition[0].pct_booked ? (parseFloat(marketStats.booking_percent_competition[0].pct_booked) * 100).toLocaleString(undefined, {maximumFractionDigits:0}) + '%' : '0%'}
-                    text="Market 30 Day Booking %"
-                  />
-                </IsoWidgetsWrapper>
-              </Spin>
-            </Col>
-
-            <Col lg={6} md={12} sm={12} xs={24} style={colStyle}>
-              <Spin spinning={this.props.loadingMarketStats} size="large">
-                <IsoWidgetsWrapper gutterBottom={20}>
-                  <CardWidget
-                    number={marketStats && marketStats.annual_revenue[0].revenue ? "$" + parseFloat(marketStats.annual_revenue[0].revenue).toLocaleString(undefined, {maximumFractionDigits:0}) : '0'}
-                    text="Your Annual Revenue"
-                    icon="ion-pricetag"
-                    iconcolor="#4482FF"
-                  />
-                </IsoWidgetsWrapper>
-              </Spin>
-              <Spin spinning={this.props.loadingMarketStats} size="large">
-                <IsoWidgetsWrapper gutterBottom={20}>
-                  <CardWidget
-                    number={marketStats && marketStats.annual_revenue_competition[0].avg_revenue ? "$" + parseFloat(marketStats.annual_revenue_competition[0].avg_revenue).toLocaleString(undefined, {maximumFractionDigits:2}) : '0'}
-                    text="Market Annual Avg."
-                    icon="ion-pricetag"
-                    iconcolor="#4482FF"
-                  />
-                </IsoWidgetsWrapper>
-              </Spin>
+                  No sved scholarships yet
+                </Card>
+                <Card
+                  style={{ marginTop: 16 }}
+                  type="inner"
+                  title="Applications"
+                  extra={<a href="#">More</a>}
+                >
+                  No applications started yet
+                </Card>
+              </Card>
             </Col>
           </Row>
-
-          <Row style={rowStyle} gutter={0} justify="start">
-            <Col lg={12} md={24} sm={24} xs={24} style={colStyle}>
-              <IsoWidgetsWrapper>
-                <ReportsWidget
-                  label="Monthly Projected Rent Comparison"
-                >
-                  <IsoWidgetBox height={470} style={{ overflow: 'hidden' }}>
-                    <Spin spinning={this.props.loadingProejectedRentChart} size="large"><ProjectedRentBarChart {...rentConfig}/></Spin>
-                  </IsoWidgetBox>
-                </ReportsWidget>
-              </IsoWidgetsWrapper>
-            </Col>
-            <Col lg={12} md={24} sm={24} xs={24} style={colStyle}>
-              <IsoWidgetsWrapper height='100%'>
-                <ReportsWidget
-                  label="Market Booking Trend"
-                >
-                  <IsoWidgetBox height={455} style={{ overflow: 'hidden' }}>
-                      <Spin spinning={this.props.loadingBookingChart} size="large"><BookingAreaChart {...bookingConfig}/></Spin>
-                  </IsoWidgetBox>
-                </ReportsWidget>
-              </IsoWidgetsWrapper>
-            </Col>
-          </Row>
-
+         
         </div>
-      </LayoutWrapper>
+      // </LayoutWrapper>
     );
   }
 }
 
 export default connect(
   state => ({
-    competition: state.Properties.competition,
-    bookings: state.Properties.bookings,
-    pricing: state.Properties.pricing,
-    projectedRent: state.Properties.projectedRent,
-    loadingPricingChart: state.Properties.loadingPricingChart,
-    loadingCompetition: state.Properties.loadingCompetition,
-    loadingBookingChart: state.Properties.loadingBookingChart,
-    loadingProejectedRentChart: state.Properties.loadingProejectedRentChart,
-    loadingMarketStats: state.Properties.loadingMarketStats,
-    marketStats: state.Properties.marketStats,
-    user: state.Auth.currentUser
+    scholarships: state.myapp.scholarships.scholarships,
+    user: state.myapp.profile.auth
   }),
-  { getCompetition, getMarketBooking, getMarketPricing, getProjectedRent, getMarketStats }
+  {getUserData, getScholarships}
+  //{ getCompetition, getMarketBooking, getMarketPricing, getProjectedRent, getMarketStats }
 )(Dashboard);

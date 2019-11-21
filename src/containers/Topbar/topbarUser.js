@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Popover from '../../components/uielements/popover';
 import IntlMessages from '../../components/utility/intlMessages';
-import authAction from '../../redux/auth/actions';
+//import authAction from '../../redux/auth/actions';
+import { logout } from '../../redux/_store/profileContainer/auth/actions'
 import TopbarDropdownWrapper from './topbarDropdown.style';
 import { Link } from 'react-router-dom';
 import { Icon } from "antd";
 
-const { logout } = authAction;
+//const { logout } = authAction;
 
 class TopbarUser extends Component {
   constructor(props) {
@@ -53,4 +54,9 @@ class TopbarUser extends Component {
     );
   }
 }
-export default connect(null, { logout })(TopbarUser);
+
+const mapStateToProps = (state) => ({
+  username: state.myapp.profile.userData.firstName
+})
+
+export default connect(mapStateToProps, { logout })(TopbarUser);
