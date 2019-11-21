@@ -1,1 +1,10 @@
-# Isomorphic - React Redux Admin Dashboard `Version 2.9.3`
+# EduRain Dashboard
+
+### Objectives:
+
+
+### Future Plans:
+
+
+### Todo:
+[] Change 'awardAmount' section of scholarships db from strings to numbers. Remove '$'. if 'varies', we can still include that  
