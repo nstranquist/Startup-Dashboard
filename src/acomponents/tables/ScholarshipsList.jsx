@@ -26,7 +26,9 @@ class ScholarshipsList extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       scholarships: [],
-      //filtering
+      // select rows
+      selectedRowKeys: [],
+      // filtering
       filteredInfo: null,
       // sorting
       sortedInfo: null,
