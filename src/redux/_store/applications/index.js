@@ -57,7 +57,8 @@ export const applicationReducer = (state=initialState, action) => {
       // array manipulation logic
       // .slice(start, end) returns new array
       let index = state.essays.findIndex(essay => essay.id === action.id)
-      newEssays = state.essays.slice(0, index).concat(state.essays.slice(index+1, state.essays.length-1))
+      newEssays = state.essays
+      newEssays.splice(index, 1)  // deletes 1 item in the array at the given index
       console.log('new essays from reducer:', newEssays)
       return {
         ...state,
