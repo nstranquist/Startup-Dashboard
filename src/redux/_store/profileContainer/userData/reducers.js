@@ -1,9 +1,9 @@
 
-import { UserDataState, UserDataTypes } from './types'
 
 const initialUserDataState = {
   myScholarships: [],
   matchedScholarships: [],
+  myApplications: [], // array of application ids
   mySchools: [],
   //matchedSchools: [],
   school: '',
@@ -38,8 +38,9 @@ export default (
       console.log('setting user realtime data')
       return {
         ...state,
-        mySchools: action.mySchools,
         myScholarships: action.myScholarships,
+        myApplications: action.myApplications,
+        mySchools: action.mySchools,
         matchedScholarships: action.matchedScholarships,
         loadingUserData: false
       }
@@ -52,6 +53,13 @@ export default (
           loadingUserStaticData: false,
           errors: null,
         }
+    // case 'ADD_USER_APPLICATION':
+    //   let newApplications = state.myApplications
+    //   newApplications.push(action.id)
+    //   return {
+    //     ...state,
+    //     myApplications: newApplications,
+    //   }
     case 'TOGGLE_FAVORITE_SCHOLARSHIP':
       // add action.id to myScholarships
       return {

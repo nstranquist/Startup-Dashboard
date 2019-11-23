@@ -1,6 +1,5 @@
 
 import { auth, firestore } from '../../../../utils/firebaseHelper'
-import { Dispatch } from 'redux'
 
 //export const getUserProfileData
 //export const updateUserProfileData
@@ -16,6 +15,7 @@ export const getUserData = () => (dispatch) => {
       dispatch({
         type: 'SET_USER_DATA',
         myScholarships: doc.data().myScholarships,
+        myApplications: doc.data().myApplications,
         mySchools: doc.data().mySchools,
         matchedScholarships: doc.data().matchedScholarships,
       })

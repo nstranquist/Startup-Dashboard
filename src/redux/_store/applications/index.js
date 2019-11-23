@@ -2,7 +2,7 @@
 import { auth, firestore } from '../../../utils/firebaseHelper'
 
 // redux thunk
-export const createApplication = (text) => (dispatch) => {  // schol_id, title
+export const createApplication = (text) => (dispatch, getState) => {  // schol_id, title
   console.log('at the createApp thunk with text:', text)
   dispatch({ type: 'LOADING' })
   // make firebase api call
@@ -10,6 +10,7 @@ export const createApplication = (text) => (dispatch) => {  // schol_id, title
     .collection('applications')
     .add({
       text,
+      uid: auth.currentUser.uid
       //schol_id,
       //title,
     })
@@ -20,6 +21,22 @@ export const createApplication = (text) => (dispatch) => {  // schol_id, title
         text,
       }
       dispatch({ type: 'ADD_APPLICATION', application })
+      return docRef.id
+    })
+    .then((id) => {
+      // get current applications from store,
+      let applications = getState().myapp.profile.userData.myApplications // might want to use a redux selector
+      // update by pushing id to applications array (stored in new variable)
+      applications.push(id)
+      // assign firebase applications[] to the new variable
+      firestore
+        .doc(`profiles/${auth.currentUser.uid}`)
+        .update({
+          myApplications: applications
+        })
+        .then(() => console.log('successfully updated user application documents'))
+        .catch(err => console.log(err))
+      //dispatch({ type: 'ADD_USER_APPLICATION', id: docRef.id})
     })
     .catch(err => console.log(err))
 }

@@ -95,8 +95,8 @@ class Editor extends Component {
         </Box>
         <Box>
           {loading && <div>loading...</div>}
-          {essays.length > 0 ? essays.map(essay => (
-            <Application essay={essay} deleteApplication={this.deleteApplication} />
+          {essays.length > 0 ? essays.map((essay, index) => (
+            <Application essay={essay} deleteApplication={this.deleteApplication} key={index} />
           )) : (
             <div>No Essays yet</div>
           )}

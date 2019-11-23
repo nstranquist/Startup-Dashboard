@@ -1,4 +1,3 @@
-import { ScholarshipsState, ScholarshipActionTypes } from './types'
 
 const initialState = {
   scholarships: [],
