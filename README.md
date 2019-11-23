@@ -1,4 +1,4 @@
-# EduRain Dashboard
+# Startup Dashboard
 
 ### Objectives:
 
