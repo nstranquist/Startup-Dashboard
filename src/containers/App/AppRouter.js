@@ -29,7 +29,7 @@ const routes = [
   },
   {
     path: 'applications',
-    component: asyncComponent(() => import('../../containers/Forms/editor')),
+    component: asyncComponent(() => import('../../acomponents/Editor/editor')),
   },
   {
     path: 'housing',
